@@ -98,11 +98,15 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Checkbox(value: _isChecked, 
-              onChanged: _checkBox
-            ),
-            Text(
-              'Clean up after Fluffy',
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Checkbox(value: _isChecked, 
+                  onChanged: _checkBox
+                ),
+                Text(
+                  'Clean up after Fluffy',
+                )]
             ),
             Visibility(visible: false,
               child: Text(
