@@ -27,17 +27,16 @@ class _TodoState extends State<Todo> {
           Checkbox(value: isChecked, onChanged: _checkChanged),
           Flexible(
             child: isChecked
-                ? TextField(
+                ? Text(
+                    text,
+                    style: TextStyle(
+                        decoration: TextDecoration.lineThrough, fontSize: 16),
+                  )
+                : TextField(
                     decoration:
                         InputDecoration.collapsed(hintText: "Enter task"),
                     controller: TextEditingController(text: text),
                     onSubmitted: _textChanged,
-                  )
-                : Text(
-                    text,
-                    style: TextStyle(
-                        decoration: TextDecoration.lineThrough,
-                        fontSize: 16),
                   ),
           )
         ]));
