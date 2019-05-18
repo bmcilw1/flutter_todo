@@ -17,14 +17,29 @@ class _TodoState extends State<Todo> {
   _TodoState(this.isChecked, this.text);
 
   void _checkChanged(bool value) => setState(() => isChecked = value);
+  void _textChanged(String value) => setState(() => text = value);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(1),
-      child: Row(children: <Widget>[
-      Checkbox(value: isChecked, onChanged: _checkChanged),
-      Text(text)
-    ]));
+        padding: EdgeInsets.all(1),
+        child: Row(children: <Widget>[
+          Checkbox(value: isChecked, onChanged: _checkChanged),
+          Flexible(
+            child: isChecked
+                ? TextField(
+                    decoration:
+                        InputDecoration.collapsed(hintText: "Enter task"),
+                    controller: TextEditingController(text: text),
+                    onSubmitted: _textChanged,
+                  )
+                : Text(
+                    text,
+                    style: TextStyle(
+                        decoration: TextDecoration.lineThrough,
+                        fontSize: 16),
+                  ),
+          )
+        ]));
   }
 }
