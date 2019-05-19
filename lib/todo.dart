@@ -13,6 +13,7 @@ class Todo extends StatefulWidget {
 class _TodoState extends State<Todo> {
   bool isChecked;
   String text;
+  bool showDelete = false;
 
   _TodoState(this.isChecked, this.text);
 
@@ -26,6 +27,7 @@ class _TodoState extends State<Todo> {
         child: Row(children: <Widget>[
           Checkbox(value: isChecked, onChanged: _checkChanged),
           Flexible(
+            fit: FlexFit.tight,
             child: isChecked
                 ? Text(
                     text,
@@ -38,7 +40,13 @@ class _TodoState extends State<Todo> {
                     controller: TextEditingController(text: text),
                     onSubmitted: _textChanged,
                   ),
-          )
+          ),
+          Visibility(
+              visible: showDelete,
+              child: IconButton(
+                icon: Icon(Icons.delete),
+                onPressed: () {},
+              ))
         ]));
   }
 }
