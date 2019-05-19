@@ -13,7 +13,6 @@ class Todo extends StatefulWidget {
 class _TodoState extends State<Todo> {
   bool isChecked;
   String text;
-  bool showDelete = false;
 
   _TodoState(this.isChecked, this.text);
 
@@ -41,12 +40,10 @@ class _TodoState extends State<Todo> {
                     onSubmitted: _textChanged,
                   ),
           ),
-          Visibility(
-              visible: showDelete,
-              child: IconButton(
-                icon: Icon(Icons.delete),
-                onPressed: () {},
-              ))
+          IconButton(
+            icon: Icon(Icons.delete),
+            onPressed: () {},
+          )
         ]));
   }
 }
