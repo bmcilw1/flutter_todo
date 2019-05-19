@@ -4,6 +4,7 @@ import 'todo.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+// TODO: Refactor constants into InheritedWidget to share constant state
   final title = 'Flutter TODO Tracker';
 
   @override
@@ -27,6 +28,7 @@ class MyHomePage extends StatefulWidget {
   State<StatefulWidget> createState() => _MyHomePageState(title);
 }
 
+// TODO: Implement BLOC pattern to house List of todos
 class _MyHomePageState extends State<MyHomePage> {
   final title;
   List<Widget> todos = [

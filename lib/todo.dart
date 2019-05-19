@@ -40,10 +40,12 @@ class _TodoState extends State<Todo> {
                     onSubmitted: _textChanged,
                   ),
           ),
-          IconButton(
-            icon: Icon(Icons.delete),
-            onPressed: () {},
-          )
+          Visibility(
+              visible: false,
+              child: IconButton(
+                icon: Icon(Icons.delete),
+                onPressed: () {},
+              ))
         ]));
   }
 }
