@@ -12,8 +12,8 @@ class TodosBloc extends Bloc<TodosEvent, TodosState> {
     dispatch(DeleteTodoEvent(key));
   }
 
-  void onUpdate(int key, Todo todo) {
-    dispatch(UpdateTodoEvent(key, todo));
+  void onUpdate(Todo todo) {
+    dispatch(UpdateTodoEvent(todo));
   }
 
   @override
