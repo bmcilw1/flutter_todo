@@ -20,7 +20,10 @@ class TodosBloc extends Bloc<TodosEvent, TodosState> {
   TodosState get initialState => TodosState.initial();
 
   @override
-  Stream<TodosState> mapEventToState(TodosState currentState, TodosEvent event) async* {
+  Stream<TodosState> mapEventToState(
+    TodosState currentState,
+    TodosEvent event,
+  ) async* {
     final TodosState _currentState = currentState;
 
     if (event is AddTodoEvent) {
