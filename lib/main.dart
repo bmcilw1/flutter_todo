@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'todo.dart';
+import './todo/todo_widget.dart';
+import './todo/todo.dart';
 
 void main() => runApp(MyApp());
 
@@ -31,16 +32,13 @@ class MyHomePage extends StatefulWidget {
 // TODO: Implement BLOC pattern to house List of todos
 class _MyHomePageState extends State<MyHomePage> {
   final title;
-  List<Widget> todos = [
-    Todo(isChecked: true, text: 'Feed the dog'),
-    Todo(isChecked: false, text: 'Shop')
-  ];
+  List<Widget> todos = [];
 
   _MyHomePageState(this.title);
 
   void _addTodo() {
     setState(() {
-      todos.add(Todo(text: "", isChecked: false,));
+      todos.add(TodoWidget(Todo(2)));
     });
   }
 

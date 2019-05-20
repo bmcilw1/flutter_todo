@@ -1,42 +1,41 @@
 import 'package:flutter/material.dart';
+import './todo.dart';
 
-class Todo extends StatefulWidget {
-  final isChecked;
-  final text;
+class TodoWidget extends StatefulWidget {
+  final Todo todo;
 
-  Todo({this.isChecked = false, this.text = ''});
+  TodoWidget(this.todo);
 
   @override
-  _TodoState createState() => _TodoState(isChecked, text);
+  _TodoWidgetState createState() => _TodoWidgetState(todo);
 }
 
-class _TodoState extends State<Todo> {
-  bool isChecked;
-  String text;
+class _TodoWidgetState extends State<TodoWidget> {
+  final Todo todo;
 
-  _TodoState(this.isChecked, this.text);
+  _TodoWidgetState(this.todo);
 
-  void _checkChanged(bool value) => setState(() => isChecked = value);
-  void _textChanged(String value) => setState(() => text = value);
+  void _checkChanged(bool value) => setState(() => todo.isChecked = value);
+  void _textChanged(String value) => setState(() => todo.text = value);
 
   @override
   Widget build(BuildContext context) {
     return Container(
         padding: EdgeInsets.all(1),
         child: Row(children: <Widget>[
-          Checkbox(value: isChecked, onChanged: _checkChanged),
+          Checkbox(value: todo.isChecked, onChanged: _checkChanged),
           Flexible(
             fit: FlexFit.tight,
-            child: isChecked
+            child: todo.isChecked
                 ? Text(
-                    text,
+                    todo.text,
                     style: TextStyle(
                         decoration: TextDecoration.lineThrough, fontSize: 16),
                   )
                 : TextField(
                     decoration:
                         InputDecoration.collapsed(hintText: "Enter task"),
-                    controller: TextEditingController(text: text),
+                    controller: TextEditingController(text: todo.text),
                     onSubmitted: _textChanged,
                   ),
           ),
