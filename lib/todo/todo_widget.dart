@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './todo.dart';
+import 'package:flutter_todo/todo/todo.dart';
 
 class TodoWidget extends StatefulWidget {
   final Todo todo;

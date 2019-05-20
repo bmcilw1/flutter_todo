@@ -1,4 +1,4 @@
-import 'todo.dart';
+import 'package:flutter_todo/todo/todo.dart';
 
 class TodosState {
   final List<Todo> todos;
