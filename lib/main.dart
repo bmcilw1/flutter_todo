@@ -32,7 +32,6 @@ class MyHomePage extends StatefulWidget {
   State<StatefulWidget> createState() => _MyHomePageState(title);
 }
 
-// TODO: Implement BLOC pattern to house List of todos
 class _MyHomePageState extends State<MyHomePage> {
   final title;
   final _todosBloc = TodosBloc();
