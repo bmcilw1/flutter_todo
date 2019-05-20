@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_todo/todo/todo.dart';
+import 'package:flutter_todo/todo/todo_bloc.dart';
 
 class TodoWidget extends StatefulWidget {
   final Todo todo;
@@ -40,11 +42,11 @@ class _TodoWidgetState extends State<TodoWidget> {
                   ),
           ),
           Visibility(
-              visible: false,
+              visible: true,
               child: IconButton(
-                icon: Icon(Icons.delete),
-                onPressed: () {},
-              ))
+                  icon: Icon(Icons.delete),
+                  onPressed: () =>
+                      BlocProvider.of<TodosBloc>(context).onDelete(todo.key)))
         ]));
   }
 }
