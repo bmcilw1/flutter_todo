@@ -15,8 +15,7 @@ class DeleteTodoEvent extends TodosEvent {
 }
 
 class UpdateTodoEvent extends TodosEvent {
-  final int key;
   final Todo todo;
 
-  UpdateTodoEvent(this.key, this.todo);
+  UpdateTodoEvent(this.todo);
 }

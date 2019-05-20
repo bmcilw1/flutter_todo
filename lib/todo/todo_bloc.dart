@@ -37,7 +37,7 @@ class TodosBloc extends Bloc<TodosEvent, TodosState> {
       _currentState.todos.removeAt(event.key);
       yield TodosState(todos: _currentState.todos);
     } else if (event is UpdateTodoEvent) {
-      _currentState.todos.removeAt(event.key);
+      _currentState.todos.removeAt(event.todo.key);
       _currentState.todos.add(Todo(
         event.todo.key,
         text: event.todo.text,
