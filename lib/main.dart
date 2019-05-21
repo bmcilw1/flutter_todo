@@ -81,8 +81,8 @@ class TodosWidget extends StatelessWidget {
             var uuid = Uuid();
             return FloatingActionButton(
               child: Icon(Icons.add),
-              onPressed: () => BlocProvider.of<TodosBloc>(context)
-                  .onAdd(Todo(uuid.v4())),
+              onPressed: () =>
+                  BlocProvider.of<TodosBloc>(context).onAdd(Todo(uuid.v4())),
             );
           }),
     );
