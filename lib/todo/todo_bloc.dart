@@ -47,7 +47,6 @@ class TodosBloc extends Bloc<TodosEvent, TodosState> {
           isChecked: event.todo.isChecked,
         )
       ]);
-      _currentState.todos.sort((a, b) => a.key.compareTo(b.key));
       yield TodosState(todos: _currentState.todos);
     }
   }
