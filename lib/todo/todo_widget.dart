@@ -22,6 +22,7 @@ class _TodoWidgetState extends State<TodoWidget> {
   @override
   Widget build(BuildContext context) {
     _textEditingController.text = todo.text;
+
     return Container(
         padding: EdgeInsets.all(1),
         child: Row(children: <Widget>[
@@ -60,11 +61,12 @@ class _TodoWidgetState extends State<TodoWidget> {
   @override
   void initState() {
     super.initState();
+
     _focusNode.addListener(() {
       BlocProvider.of<TodosBloc>(context).onUpdate(Todo(
         todo.key,
         isChecked: todo.isChecked,
-        text: _textEditingController.value.text,
+        text: _textEditingController.text,
       ));
     });
   }
