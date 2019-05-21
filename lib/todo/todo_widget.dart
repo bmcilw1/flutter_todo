@@ -3,29 +3,24 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_todo/todo/todo.dart';
 import 'package:flutter_todo/todo/todo_bloc.dart';
 
-class TodoWidget extends StatefulWidget {
+class TodoWidget extends StatelessWidget {
   final Todo todo;
 
   TodoWidget(this.todo);
-
-  @override
-  _TodoWidgetState createState() => _TodoWidgetState(todo);
-}
-
-class _TodoWidgetState extends State<TodoWidget> {
-  final Todo todo;
-
-  _TodoWidgetState(this.todo);
-
-  void _checkChanged(bool value) => setState(() => todo.isChecked = value);
-  void _textChanged(String value) => setState(() => todo.text = value);
 
   @override
   Widget build(BuildContext context) {
     return Container(
         padding: EdgeInsets.all(1),
         child: Row(children: <Widget>[
-          Checkbox(value: todo.isChecked, onChanged: _checkChanged),
+          Checkbox(
+              value: todo.isChecked,
+              onChanged: (value) =>
+                  BlocProvider.of<TodosBloc>(context).onUpdate(Todo(
+                    todo.key,
+                    isChecked: value,
+                    text: todo.text,
+                  ))),
           Flexible(
             fit: FlexFit.tight,
             child: todo.isChecked
@@ -38,7 +33,12 @@ class _TodoWidgetState extends State<TodoWidget> {
                     decoration:
                         InputDecoration.collapsed(hintText: "Enter task"),
                     controller: TextEditingController(text: todo.text),
-                    onSubmitted: _textChanged,
+                    onSubmitted: (value) =>
+                        BlocProvider.of<TodosBloc>(context).onUpdate(Todo(
+                          todo.key,
+                          isChecked: todo.isChecked,
+                          text: value,
+                        )),
                   ),
           ),
           Visibility(
