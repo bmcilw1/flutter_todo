@@ -14,12 +14,14 @@ class TodoWidget extends StatefulWidget {
 
 class _TodoWidgetState extends State<TodoWidget> {
   final FocusNode _focusNode = FocusNode();
+  final TextEditingController _textEditingController = TextEditingController();
   final Todo todo;
 
   _TodoWidgetState(this.todo);
 
   @override
   Widget build(BuildContext context) {
+    _textEditingController.text = todo.text;
     return Container(
         padding: EdgeInsets.all(1),
         child: Row(children: <Widget>[
@@ -42,7 +44,7 @@ class _TodoWidgetState extends State<TodoWidget> {
                 : TextField(
                     decoration:
                         InputDecoration.collapsed(hintText: "Enter task"),
-                    controller: TextEditingController(text: todo.text),
+                    controller: _textEditingController,
                     focusNode: _focusNode,
                   ),
           ),
@@ -59,11 +61,18 @@ class _TodoWidgetState extends State<TodoWidget> {
   void initState() {
     super.initState();
     _focusNode.addListener(() {
-          BlocProvider.of<TodosBloc>(context).onUpdate(Todo(
-            todo.key,
-            isChecked: todo.isChecked,
-            text: todo.text,
-          ));
+      BlocProvider.of<TodosBloc>(context).onUpdate(Todo(
+        todo.key,
+        isChecked: todo.isChecked,
+        text: _textEditingController.value.text,
+      ));
     });
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    _textEditingController.dispose();
+    super.dispose();
   }
 }
