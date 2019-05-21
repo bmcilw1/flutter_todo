@@ -6,14 +6,14 @@ import 'package:flutter_todo/todo/todo_bloc.dart';
 class TodoWidget extends StatefulWidget {
   final Todo todo;
 
-  TodoWidget(this.todo);
+  TodoWidget(this.todo, {Key key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _TodoWidgetState(todo);
 }
 
 class _TodoWidgetState extends State<TodoWidget> {
-  final FocusNode _focusNode = FocusNode();
+  //final FocusNode _focusNode = FocusNode();
   final TextEditingController _textEditingController = TextEditingController();
   final Todo todo;
 
@@ -46,7 +46,15 @@ class _TodoWidgetState extends State<TodoWidget> {
                     decoration:
                         InputDecoration.collapsed(hintText: "Enter task"),
                     controller: _textEditingController,
-                    focusNode: _focusNode,
+                    // focusNode: _focusNode,
+                    onSubmitted: (value) {
+                        todo.text = value;
+                        BlocProvider.of<TodosBloc>(context).onUpdate(Todo(
+                          todo.key,
+                          isChecked: todo.isChecked,
+                          text: value,
+                        ));
+                    }
                   ),
           ),
           Visibility(
@@ -58,22 +66,26 @@ class _TodoWidgetState extends State<TodoWidget> {
         ]));
   }
 
+/*
   @override
   void initState() {
     super.initState();
 
     _focusNode.addListener(() {
+      /*
       BlocProvider.of<TodosBloc>(context).onUpdate(Todo(
         todo.key,
         isChecked: todo.isChecked,
         text: _textEditingController.text,
       ));
+      */
     });
   }
+  */
 
   @override
   void dispose() {
-    _focusNode.dispose();
+    //_focusNode.dispose();
     _textEditingController.dispose();
     super.dispose();
   }
