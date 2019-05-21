@@ -72,7 +72,7 @@ class TodosWidget extends StatelessWidget {
           bloc: BlocProvider.of<TodosBloc>(context),
           builder: (context, TodosState state) {
             return Column(
-              children: [for (var todo in state.todos) TodoWidget(todo)],
+              children: [for (Todo todo in state.todos) TodoWidget(todo)],
             );
           }),
       floatingActionButton: BlocBuilder(
