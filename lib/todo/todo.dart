@@ -1,5 +1,5 @@
 class Todo {
-  final int key;
+  final String key;
   String text;
   bool isChecked;
 

@@ -9,7 +9,7 @@ class AddTodoEvent extends TodosEvent {
 }
 
 class DeleteTodoEvent extends TodosEvent {
-  final int key;
+  final String key;
 
   DeleteTodoEvent(this.key);
 }

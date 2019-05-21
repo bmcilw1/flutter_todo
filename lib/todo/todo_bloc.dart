@@ -8,7 +8,7 @@ class TodosBloc extends Bloc<TodosEvent, TodosState> {
     dispatch(AddTodoEvent(todo));
   }
 
-  void onDelete(int key) {
+  void onDelete(String key) {
     dispatch(DeleteTodoEvent(key));
   }
 
@@ -34,15 +34,19 @@ class TodosBloc extends Bloc<TodosEvent, TodosState> {
       ));
       yield TodosState(todos: _currentState.todos);
     } else if (event is DeleteTodoEvent) {
-      _currentState.todos.removeAt(event.key);
+      _currentState.todos.removeWhere((todo) => todo.key == event.key);
       yield TodosState(todos: _currentState.todos);
     } else if (event is UpdateTodoEvent) {
-      _currentState.todos.removeAt(event.todo.key);
-      _currentState.todos.add(Todo(
-        event.todo.key,
-        text: event.todo.text,
-        isChecked: event.todo.isChecked,
-      ));
+      var i =
+          _currentState.todos.indexWhere((todo) => todo.key == event.todo.key);
+      _currentState.todos.removeAt(i);
+      _currentState.todos.insertAll(i, [
+        Todo(
+          event.todo.key,
+          text: event.todo.text,
+          isChecked: event.todo.isChecked,
+        )
+      ]);
       _currentState.todos.sort((a, b) => a.key.compareTo(b.key));
       yield TodosState(todos: _currentState.todos);
     }

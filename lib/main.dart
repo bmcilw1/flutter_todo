@@ -4,6 +4,7 @@ import 'package:flutter_todo/todo/todo_bloc.dart';
 import 'package:flutter_todo/todo/todo_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_todo/todo/todos_state.dart';
+import 'package:uuid/uuid.dart';
 
 void main() => runApp(MyApp());
 
@@ -77,10 +78,11 @@ class TodosWidget extends StatelessWidget {
       floatingActionButton: BlocBuilder(
           bloc: BlocProvider.of<TodosBloc>(context),
           builder: (context, TodosState state) {
+            var uuid = Uuid();
             return FloatingActionButton(
               child: Icon(Icons.add),
               onPressed: () => BlocProvider.of<TodosBloc>(context)
-                  .onAdd(Todo(state.todos.length)),
+                  .onAdd(Todo(uuid.v4())),
             );
           }),
     );
