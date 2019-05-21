@@ -3,10 +3,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_todo/todo/todo.dart';
 import 'package:flutter_todo/todo/todo_bloc.dart';
 
-class TodoWidget extends StatelessWidget {
+class TodoWidget extends StatefulWidget {
   final Todo todo;
 
   TodoWidget(this.todo);
+
+  @override
+  State<StatefulWidget> createState() => _TodoWidgetState(todo);
+}
+
+class _TodoWidgetState extends State<TodoWidget> {
+  final FocusNode _focusNode = FocusNode();
+  final Todo todo;
+
+  _TodoWidgetState(this.todo);
 
   @override
   Widget build(BuildContext context) {
@@ -33,12 +43,7 @@ class TodoWidget extends StatelessWidget {
                     decoration:
                         InputDecoration.collapsed(hintText: "Enter task"),
                     controller: TextEditingController(text: todo.text),
-                    onSubmitted: (value) =>
-                        BlocProvider.of<TodosBloc>(context).onUpdate(Todo(
-                          todo.key,
-                          isChecked: todo.isChecked,
-                          text: value,
-                        )),
+                    focusNode: _focusNode,
                   ),
           ),
           Visibility(
@@ -48,5 +53,17 @@ class TodoWidget extends StatelessWidget {
                   onPressed: () =>
                       BlocProvider.of<TodosBloc>(context).onDelete(todo.key)))
         ]));
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNode.addListener(() {
+          BlocProvider.of<TodosBloc>(context).onUpdate(Todo(
+            todo.key,
+            isChecked: todo.isChecked,
+            text: todo.text,
+          ));
+    });
   }
 }
