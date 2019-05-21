@@ -55,12 +55,12 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class TodosWidget extends StatelessWidget {
+  final MyHomePage widget;
+
   const TodosWidget({
     Key key,
     @required this.widget,
   }) : super(key: key);
-
-  final MyHomePage widget;
 
   @override
   Widget build(BuildContext context) {
